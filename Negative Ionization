@@ -1,0 +1,186 @@
+clc
+clear all
+data = zeros (0,0);
+
+data = xlsread(['data//spectrum//HeatPlate',num2str(1),'_NEG.xlsx']);
+
+Well = zeros (0,0);
+for con1 = 1:96
+    Well(:,con1) = data (:,con1+1);
+end
+
+% Compound
+% % Abetic acid
+Peak_AbeticAcid = data (:,1);
+window_width = 0.1;
+P_AbeticAcid = 301.28;
+Peak_AbeticAcid_L = P_AbeticAcid - window_width;
+Peak_AbeticAcid_R = P_AbeticAcid + window_width;
+Select_Peak_AbeticAcid = logical((Peak_AbeticAcid > Peak_AbeticAcid_L) .* (Peak_AbeticAcid < Peak_AbeticAcid_R));
+
+Peak_Intensity_AbeticAcid = zeros (1,96);
+for con_AbeticAcid = 1:96
+    Peak_Intensity_AbeticAcid (1,con_AbeticAcid) = max(Well(Select_Peak_AbeticAcid,con_AbeticAcid));
+end
+
+[Intensity_AbeticAcid,Well_number_AbeticAcid] = sort(Peak_Intensity_AbeticAcid);
+Order_AbeticAcid (1,1) = P_AbeticAcid;
+Order_AbeticAcid (2:97,1) = Intensity_AbeticAcid;
+Order_AbeticAcid (2:97,2) = Well_number_AbeticAcid;
+
+Summary_AbeticAcid = sortrows (Order_AbeticAcid,2);
+Summary_AbeticAcid (:,2) = [];
+
+% % Abetic Acid + OH
+Peak_AbeticAcid_OH = data (:,1);
+window_width = 0.1;
+Peak_AbeticAcid_OH_L = P_AbeticAcid + 16 - window_width;
+Peak_AbeticAcid_OH_R = P_AbeticAcid + 16 + window_width;
+Select_peak_AbeticAcid_OH = logical((Peak_AbeticAcid_OH > Peak_AbeticAcid_OH_L) .* (Peak_AbeticAcid_OH < Peak_AbeticAcid_OH_R));
+
+Peak_Intensity_AbeticAcid_OH = zeros (1,96);
+for con_AbeticAcid_OH = 1:96
+    Peak_Intensity_AbeticAcid_OH (1,con_AbeticAcid_OH) = max(Well(Select_peak_AbeticAcid_OH,con_AbeticAcid_OH));
+end
+
+[Intensity_AbeticAcid_OH,Well_number_AbeticAcid_OH] = sort(Peak_Intensity_AbeticAcid_OH);
+Order_AbeticAcid_OH (1,1) = P_AbeticAcid + 16;
+Order_AbeticAcid_OH (2:97,1) = Intensity_AbeticAcid_OH;
+Order_AbeticAcid_OH (2:97,2) = Well_number_AbeticAcid_OH;
+
+Summary_AbeticAcid_OH = sortrows (Order_AbeticAcid_OH,2);
+Summary_AbeticAcid_OH (:,2) = [];
+
+AbeticAcid = [Summary_AbeticAcid,Summary_AbeticAcid_OH];
+
+
+% % Valproate
+Peak_Valproate = data (:,1);
+window_width = 0.1;
+P_Valproate = 143.12;
+Peak_Valproate_L = P_Valproate - window_width;
+Peak_Valproate_R = P_Valproate + window_width;
+Select_Peak_Valproate = logical((Peak_Valproate > Peak_Valproate_L) .* (Peak_Valproate < Peak_Valproate_R));
+
+Peak_Intensity_Valproate = zeros (1,96);
+for con_Valproate = 1:96
+    Peak_Intensity_Valproate (1,con_Valproate) = max(Well(Select_Peak_Valproate,con_Valproate));
+end
+
+[Intensity_Valproate,Well_number_Valproate] = sort(Peak_Intensity_Valproate);
+Order_Valproate (1,1) = P_Valproate;
+Order_Valproate (2:97,1) = Intensity_Valproate;
+Order_Valproate (2:97,2) = Well_number_Valproate;
+
+Summary_Valproate = sortrows (Order_Valproate,2);
+Summary_Valproate (:,2) = [];
+
+% % Valproate + OH
+Peak_Valproate_OH = data (:,1);
+window_width = 0.1;
+Peak_Valproate_OH_L = P_Valproate + 16 - window_width;
+Peak_Valproate_OH_R = P_Valproate + 16 + window_width;
+Select_peak_Valproate_OH = logical((Peak_Valproate_OH > Peak_Valproate_OH_L) .* (Peak_Valproate_OH < Peak_Valproate_OH_R));
+
+Peak_Intensity_Valproate_OH = zeros (1,96);
+for con_Valproate_OH = 1:96
+    Peak_Intensity_Valproate_OH (1,con_Valproate_OH) = max(Well(Select_peak_Valproate_OH,con_Valproate_OH));
+end
+
+[Intensity_Valproate_OH,Well_number_Valproate_OH] = sort(Peak_Intensity_Valproate_OH);
+Order_Valproate_OH (1,1) = P_Valproate + 16;
+Order_Valproate_OH (2:97,1) = Intensity_Valproate_OH;
+Order_Valproate_OH (2:97,2) = Well_number_Valproate_OH;
+
+Summary_Valproate_OH = sortrows (Order_Valproate_OH,2);
+Summary_Valproate_OH (:,2) = [];
+
+Valproate = [Summary_Valproate,Summary_Valproate_OH];
+
+
+% % Diclofenac
+Peak_Diclofenac = data (:,1);
+window_width = 0.1;
+P_Diclofenac = 250.06;
+Peak_Diclofenac_L = P_Diclofenac - window_width;
+Peak_Diclofenac_R = P_Diclofenac + window_width;
+Select_Peak_Diclofenac = logical((Peak_Diclofenac > Peak_Diclofenac_L) .* (Peak_Diclofenac < Peak_Diclofenac_R));
+
+Peak_Intensity_Diclofenac = zeros (1,96);
+for con_Diclofenac = 1:96
+    Peak_Intensity_Diclofenac (1,con_Diclofenac) = max(Well(Select_Peak_Diclofenac,con_Diclofenac));
+end
+
+[Intensity_Diclofenac,Well_number_Diclofenac] = sort(Peak_Intensity_Diclofenac);
+Order_Diclofenac (1,1) = P_Diclofenac;
+Order_Diclofenac (2:97,1) = Intensity_Diclofenac;
+Order_Diclofenac (2:97,2) = Well_number_Diclofenac;
+
+Summary_Diclofenac = sortrows (Order_Diclofenac,2);
+Summary_Diclofenac (:,2) = [];
+
+% % Diclofenac + OH
+Peak_Diclofenac_OH = data (:,1);
+window_width = 0.1;
+Peak_Diclofenac_OH_L = P_Diclofenac + 16 - window_width;
+Peak_Diclofenac_OH_R = P_Diclofenac + 16 + window_width;
+Select_peak_Diclofenac_OH = logical((Peak_Diclofenac_OH > Peak_Diclofenac_OH_L) .* (Peak_Diclofenac_OH < Peak_Diclofenac_OH_R));
+
+Peak_Intensity_Diclofenac_OH = zeros (1,96);
+for con_Diclofenac_OH = 1:96
+    Peak_Intensity_Diclofenac_OH (1,con_Diclofenac_OH) = max(Well(Select_peak_Diclofenac_OH,con_Diclofenac_OH));
+end
+
+[Intensity_Diclofenac_OH,Well_number_Diclofenac_OH] = sort(Peak_Intensity_Diclofenac_OH);
+Order_Diclofenac_OH (1,1) = P_Diclofenac + 16;
+Order_Diclofenac_OH (2:97,1) = Intensity_Diclofenac_OH;
+Order_Diclofenac_OH (2:97,2) = Well_number_Diclofenac_OH;
+
+Summary_Diclofenac_OH = sortrows (Order_Diclofenac_OH,2);
+Summary_Diclofenac_OH (:,2) = [];
+
+Diclofenac = [Summary_Diclofenac,Summary_Diclofenac_OH];
+
+
+% % Compactin
+Peak_Compactin = data (:,1);
+window_width = 0.1;
+P_Compactin = 407.33;
+Peak_Compactin_L = P_Compactin - window_width;
+Peak_Compactin_R = P_Compactin + window_width;
+Select_Peak_Compactin = logical((Peak_Compactin > Peak_Compactin_L) .* (Peak_Compactin < Peak_Compactin_R));
+
+Peak_Intensity_Compactin = zeros (1,96);
+for con_Compactin = 1:96
+    Peak_Intensity_Compactin (1,con_Compactin) = max(Well(Select_Peak_Compactin,con_Compactin));
+end
+
+[Intensity_Compactin,Well_number_Compactin] = sort(Peak_Intensity_Compactin);
+Order_Compactin (1,1) = P_Compactin;
+Order_Compactin (2:97,1) = Intensity_Compactin;
+Order_Compactin (2:97,2) = Well_number_Compactin;
+
+Summary_Compactin = sortrows (Order_Compactin,2);
+Summary_Compactin (:,2) = [];
+
+% % Compactin + OH
+Peak_Compactin_OH = data (:,1);
+window_width = 0.1;
+Peak_Compactin_OH_L = P_Compactin + 16 - window_width;
+Peak_Compactin_OH_R = P_Compactin + 16 + window_width;
+Select_peak_Compactin_OH = logical((Peak_Compactin_OH > Peak_Compactin_OH_L) .* (Peak_Compactin_OH < Peak_Compactin_OH_R));
+
+Peak_Intensity_Compactin_OH = zeros (1,96);
+for con_Compactin_OH = 1:96
+    Peak_Intensity_Compactin_OH (1,con_Compactin_OH) = max(Well(Select_peak_Compactin_OH,con_Compactin_OH));
+end
+
+[Intensity_Compactin_OH,Well_number_Compactin_OH] = sort(Peak_Intensity_Compactin_OH);
+Order_Compactin_OH (1,1) = P_Compactin + 16;
+Order_Compactin_OH (2:97,1) = Intensity_Compactin_OH;
+Order_Compactin_OH (2:97,2) = Well_number_Compactin_OH;
+
+Summary_Compactin_OH = sortrows (Order_Compactin_OH,2);
+Summary_Compactin_OH (:,2) = [];
+
+Compactin = [Summary_Compactin,Summary_Compactin_OH];

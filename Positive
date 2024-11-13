@@ -1,0 +1,186 @@
+clc
+clear all
+data = zeros (0,0);
+
+data = xlsread(['data//spectrum//HeatPlate',num2str(1),'_POS.xlsx']);
+
+Well = zeros (0,0);
+for con1 = 1:96
+    Well(:,con1) = data (:,con1+1);
+end
+
+% Compound
+% % Harmine
+Peak_Harmine = data (:,1);
+window_width = 0.1;
+P_Harmine = 213.14;
+Peak_Harmine_L = P_Harmine - window_width;
+Peak_Harmine_R = P_Harmine + window_width;
+Select_Peak_Harmine = logical((Peak_Harmine > Peak_Harmine_L) .* (Peak_Harmine < Peak_Harmine_R));
+
+Peak_Intensity_Harmine = zeros (1,96);
+for con_Harmine = 1:96
+    Peak_Intensity_Harmine (1,con_Harmine) = max(Well(Select_Peak_Harmine,con_Harmine));
+end
+
+[Intensity_Harmine,Well_number_Harmine] = sort(Peak_Intensity_Harmine);
+Order_Harmine (1,1) = P_Harmine;
+Order_Harmine (2:97,1) = Intensity_Harmine;
+Order_Harmine (2:97,2) = Well_number_Harmine;
+
+Summary_Harmine = sortrows (Order_Harmine,2);
+Summary_Harmine (:,2) = [];
+
+% % Harmine + OH
+Peak_Harmine_OH = data (:,1);
+window_width = 0.1;
+Peak_Harmine_OH_L = P_Harmine + 16 - window_width;
+Peak_Harmine_OH_R = P_Harmine + 16 + window_width;
+Select_peak_Harmine_OH = logical((Peak_Harmine_OH > Peak_Harmine_OH_L) .* (Peak_Harmine_OH < Peak_Harmine_OH_R));
+
+Peak_Intensity_Harmine_OH = zeros (1,96);
+for con_Harmine_OH = 1:96
+    Peak_Intensity_Harmine_OH (1,con_Harmine_OH) = max(Well(Select_peak_Harmine_OH,con_Harmine_OH));
+end
+
+[Intensity_Harmine_OH,Well_number_Harmine_OH] = sort(Peak_Intensity_Harmine_OH);
+Order_Harmine_OH (1,1) = P_Harmine + 16;
+Order_Harmine_OH (2:97,1) = Intensity_Harmine_OH;
+Order_Harmine_OH (2:97,2) = Well_number_Harmine_OH;
+
+Summary_Harmine_OH = sortrows (Order_Harmine_OH,2);
+Summary_Harmine_OH (:,2) = [];
+
+Harmine = [Summary_Harmine,Summary_Harmine_OH];
+
+
+% % Dextromethorphan
+Peak_Dextromethorphan = data (:,1);
+window_width = 0.1;
+P_Dextromethorphan = 272.25;
+Peak_Dextromethorphan_L = P_Dextromethorphan - window_width;
+Peak_Dextromethorphan_R = P_Dextromethorphan + window_width;
+Select_Peak_Dextromethorphan = logical((Peak_Dextromethorphan > Peak_Dextromethorphan_L) .* (Peak_Dextromethorphan < Peak_Dextromethorphan_R));
+
+Peak_Intensity_Dextromethorphan = zeros (1,96);
+for con_Dextromethorphan = 1:96
+    Peak_Intensity_Dextromethorphan (1,con_Dextromethorphan) = max(Well(Select_Peak_Dextromethorphan,con_Dextromethorphan));
+end
+
+[Intensity_Dextromethorphan,Well_number_Dextromethorphan] = sort(Peak_Intensity_Dextromethorphan);
+Order_Dextromethorphan (1,1) = P_Dextromethorphan;
+Order_Dextromethorphan (2:97,1) = Intensity_Dextromethorphan;
+Order_Dextromethorphan (2:97,2) = Well_number_Dextromethorphan;
+
+Summary_Dextromethorphan = sortrows (Order_Dextromethorphan,2);
+Summary_Dextromethorphan (:,2) = [];
+
+% % Dextromethorphan + OH
+Peak_Dextromethorphan_OH = data (:,1);
+window_width = 0.1;
+Peak_Dextromethorphan_OH_L = P_Dextromethorphan + 16 - window_width;
+Peak_Dextromethorphan_OH_R = P_Dextromethorphan + 16 + window_width;
+Select_peak_Dextromethorphan_OH = logical((Peak_Dextromethorphan_OH > Peak_Dextromethorphan_OH_L) .* (Peak_Dextromethorphan_OH < Peak_Dextromethorphan_OH_R));
+
+Peak_Intensity_Dextromethorphan_OH = zeros (1,96);
+for con_Dextromethorphan_OH = 1:96
+    Peak_Intensity_Dextromethorphan_OH (1,con_Dextromethorphan_OH) = max(Well(Select_peak_Dextromethorphan_OH,con_Dextromethorphan_OH));
+end
+
+[Intensity_Dextromethorphan_OH,Well_number_Dextromethorphan_OH] = sort(Peak_Intensity_Dextromethorphan_OH);
+Order_Dextromethorphan_OH (1,1) = P_Dextromethorphan + 16;
+Order_Dextromethorphan_OH (2:97,1) = Intensity_Dextromethorphan_OH;
+Order_Dextromethorphan_OH (2:97,2) = Well_number_Dextromethorphan_OH;
+
+Summary_Dextromethorphan_OH = sortrows (Order_Dextromethorphan_OH,2);
+Summary_Dextromethorphan_OH (:,2) = [];
+
+Dextromethorphan = [Summary_Dextromethorphan,Summary_Dextromethorphan_OH];
+
+
+% % Testosterone
+Peak_Testosterone = data (:,1);
+window_width = 0.1;
+P_Testosterone = 289.28;
+Peak_Testosterone_L = P_Testosterone - window_width;
+Peak_Testosterone_R = P_Testosterone + window_width;
+Select_Peak_Testosterone = logical((Peak_Testosterone > Peak_Testosterone_L) .* (Peak_Testosterone < Peak_Testosterone_R));
+
+Peak_Intensity_Testosterone = zeros (1,96);
+for con_Testosterone = 1:96
+    Peak_Intensity_Testosterone (1,con_Testosterone) = max(Well(Select_Peak_Testosterone,con_Testosterone));
+end
+
+[Intensity_Testosterone,Well_number_Testosterone] = sort(Peak_Intensity_Testosterone);
+Order_Testosterone (1,1) = P_Testosterone;
+Order_Testosterone (2:97,1) = Intensity_Testosterone;
+Order_Testosterone (2:97,2) = Well_number_Testosterone;
+
+Summary_Testosterone = sortrows (Order_Testosterone,2);
+Summary_Testosterone (:,2) = [];
+
+% % Testosterone + OH
+Peak_Testosterone_OH = data (:,1);
+window_width = 0.1;
+Peak_Testosterone_OH_L = P_Testosterone + 16 - window_width;
+Peak_Testosterone_OH_R = P_Testosterone + 16 + window_width;
+Select_peak_Testosterone_OH = logical((Peak_Testosterone_OH > Peak_Testosterone_OH_L) .* (Peak_Testosterone_OH < Peak_Testosterone_OH_R));
+
+Peak_Intensity_Testosterone_OH = zeros (1,96);
+for con_Testosterone_OH = 1:96
+    Peak_Intensity_Testosterone_OH (1,con_Testosterone_OH) = max(Well(Select_peak_Testosterone_OH,con_Testosterone_OH));
+end
+
+[Intensity_Testosterone_OH,Well_number_Testosterone_OH] = sort(Peak_Intensity_Testosterone_OH);
+Order_Testosterone_OH (1,1) = P_Testosterone + 16;
+Order_Testosterone_OH (2:97,1) = Intensity_Testosterone_OH;
+Order_Testosterone_OH (2:97,2) = Well_number_Testosterone_OH;
+
+Summary_Testosterone_OH = sortrows (Order_Testosterone_OH,2);
+Summary_Testosterone_OH (:,2) = [];
+
+Testosterone = [Summary_Testosterone,Summary_Testosterone_OH];
+
+
+% % Duloxetine
+Peak_Duloxetine = data (:,1);
+window_width = 0.1;
+P_Duloxetine = 298.1;
+Peak_Doluxetine_L = P_Duloxetine - window_width;
+Peak_Duloxetine_R = P_Duloxetine + window_width;
+Select_Peak_Duloxetine = logical((Peak_Duloxetine > Peak_Doluxetine_L) .* (Peak_Duloxetine < Peak_Duloxetine_R));
+
+Peak_Intensity_Duloxetine = zeros (1,96);
+for con_Duloxetine = 1:96
+    Peak_Intensity_Duloxetine (1,con_Duloxetine) = max(Well(Select_Peak_Duloxetine,con_Duloxetine));
+end
+
+[Intensity_Duloxetine,Well_number_Duloxetine] = sort(Peak_Intensity_Duloxetine);
+Order_Dulooxetine (1,1) = P_Duloxetine;
+Order_Dulooxetine (2:97,1) = Intensity_Duloxetine;
+Order_Dulooxetine (2:97,2) = Well_number_Duloxetine;
+
+Summary_Duloxetine = sortrows (Order_Dulooxetine,2);
+Summary_Duloxetine (:,2) = [];
+
+% % Duloxetine + OH
+Peak_Duloxetine_OH = data (:,1);
+window_width = 0.1;
+Peak_Duloxetine_OH_L = P_Duloxetine + 16 - window_width;
+Peak_Duloxetine_OH_R = P_Duloxetine + 16 + window_width;
+Select_peak_Duloxetine_OH = logical((Peak_Duloxetine_OH > Peak_Duloxetine_OH_L) .* (Peak_Duloxetine_OH < Peak_Duloxetine_OH_R));
+
+Peak_Intensity_Duloxetine_OH = zeros (1,96);
+for con_Duloxetine_OH = 1:96
+    Peak_Intensity_Duloxetine_OH (1,con_Duloxetine_OH) = max(Well(Select_peak_Duloxetine_OH,con_Duloxetine_OH));
+end
+
+[Intensity_Duloxetine_OH,Well_number_Duloxetine_OH] = sort(Peak_Intensity_Duloxetine_OH);
+Order_Duloxetine_OH (1,1) = P_Duloxetine + 16;
+Order_Duloxetine_OH (2:97,1) = Intensity_Duloxetine_OH;
+Order_Duloxetine_OH (2:97,2) = Well_number_Duloxetine_OH;
+
+Summary_Duloxetine_OH = sortrows (Order_Duloxetine_OH,2);
+Summary_Duloxetine_OH (:,2) = [];
+
+Duloxetine = [Summary_Duloxetine,Summary_Duloxetine_OH];
